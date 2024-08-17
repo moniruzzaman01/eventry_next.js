@@ -1,23 +1,29 @@
 import Image from "next/image";
-import eventImage from "@/public/image.png";
 import ActionButton from "../ActionButton";
 
-export default function Hero() {
+export default function Hero({ eventDetails }) {
+  const { name, location, interested_ids, going_ids, imageUrl } =
+    eventDetails || {};
+
   return (
     <>
       <div className="bg-gradient-to-b from-slate-200/20 to-slate-800/30">
-        <Image src={eventImage} alt="Event 1" className="h-[450px] mx-auto" />
+        <Image
+          src={imageUrl}
+          alt="Event 1"
+          className="h-[450px] mx-auto"
+          height={900}
+          width={900}
+        />
       </div>
       <div className="flex items-end">
         <div className="flex-auto py-4">
-          <h1 className="font-bold text-2xl">Google I/O Extended</h1>
-          <p className="text-[#9C9C9C] text-base mt-1">
-            Rangpur, Dhaka, Bangladesh, Rangpur, Bangladesh
-          </p>
+          <h1 className="font-bold text-2xl">{name}</h1>
+          <p className="text-[#9C9C9C] text-base mt-1">{location}</p>
           <div className="text-[#737373] text-sm mt-1">
-            <span>1k Interested</span>
+            <span>{interested_ids?.length} Interested</span>
             <span>|</span>
-            <span>40K Going</span>
+            <span>{going_ids?.length} Going</span>
           </div>
         </div>
 

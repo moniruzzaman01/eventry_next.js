@@ -6,3 +6,8 @@ export function replaceMongoIdInArray(array) {
     };
   });
 }
+
+export function replaceMongoIdInObject(obj) {
+  const { _id, ...updatedObj } = { ...obj, id: obj._id.toString() };
+  return updatedObj;
+}
