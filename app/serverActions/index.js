@@ -17,6 +17,6 @@ export async function loginUser(formData) {
     const response = await findUserWithEmailAndPassword(credentials);
     return response;
   } catch (err) {
-    throw new Error(err?.message);
+    throw err;
   }
 }

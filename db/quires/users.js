@@ -9,5 +9,5 @@ export async function findUserWithEmailAndPassword(user) {
   if (response) {
     return replaceMongoIdInObject(response);
   }
-  throw new Error("Invalid email or password");
+  return null;
 }

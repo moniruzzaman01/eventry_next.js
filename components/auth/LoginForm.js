@@ -20,6 +20,8 @@ export default function LoginForm() {
       if (response) {
         setAuth(response);
         router.push("/");
+      } else {
+        setError("username or password doesnot match!!!");
       }
     } catch (err) {
       setError(err?.message);
