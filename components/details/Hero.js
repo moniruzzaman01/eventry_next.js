@@ -2,7 +2,7 @@ import Image from "next/image";
 import ActionButton from "../ActionButton";
 
 export default function Hero({ eventDetails }) {
-  const { name, location, interested_ids, going_ids, imageUrl } =
+  const { id, name, location, interested_ids, going_ids, imageUrl } =
     eventDetails || {};
 
   return (
@@ -27,7 +27,7 @@ export default function Hero({ eventDetails }) {
           </div>
         </div>
 
-        <ActionButton />
+        <ActionButton eventId={id} />
       </div>
     </>
   );

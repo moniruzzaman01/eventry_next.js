@@ -1,17 +1,38 @@
-import Link from "next/link";
+"use client";
 
-export default function ActionButton() {
+import { addOrRemoveInterest } from "@/app/serverActions";
+import { useAuth } from "@/hooks/useAuth";
+import { useRouter } from "next/navigation";
+
+export default function ActionButton({ eventId }) {
+  const { auth } = useAuth();
+  const router = useRouter();
+
+  async function handleInterest() {
+    if (!auth) {
+      return router.push("/login");
+    }
+    await addOrRemoveInterest(eventId, auth?.id);
+  }
+
+  function handleOnGoing() {
+    if (!auth) {
+      return router.push("/login");
+    }
+    router.push("/payment");
+  }
+
   return (
     <div className="w-full flex gap-4 mt-4 flex-1 ">
-      <button className="w-full bg-indigo-600 hover:bg-indigo-800">
+      <button
+        onClick={handleInterest}
+        className="w-full bg-indigo-600 hover:bg-indigo-800"
+      >
         Interested
       </button>
-      <Link
-        href="/payment"
-        className=" text-center w-full  py-2 px-2 rounded-md border border-[#5F5F5F]/50 shadow-sm cursor-pointer bg-[#464849] hover:bg-[#3C3D3D] transition-colors active:translate-y-1"
-      >
+      <button onClick={handleOnGoing} className="w-full">
         Going
-      </Link>
+      </button>
     </div>
   );
 }

@@ -27,7 +27,7 @@ export default function SingleEvent({ event }) {
           <span>{going_ids?.length} Going</span>
         </div>
 
-        <ActionButton />
+        <ActionButton eventId={id} />
       </div>
     </div>
   );

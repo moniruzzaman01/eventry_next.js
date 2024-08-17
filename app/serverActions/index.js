@@ -1,6 +1,8 @@
 "use server";
 
+import { updateInterest } from "@/db/quires/events";
 import { createUser, findUserWithEmailAndPassword } from "@/db/quires/users";
+import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
 export async function registerUser(formData) {
@@ -16,6 +18,16 @@ export async function loginUser(formData) {
     credentials.password = formData.get("password");
     const response = await findUserWithEmailAndPassword(credentials);
     return response;
+  } catch (err) {
+    throw err;
+  }
+}
+export async function addOrRemoveInterest(eventId, userId) {
+  try {
+    const isUpdated = await updateInterest(eventId, userId);
+    if (isUpdated) {
+      revalidatePath("/");
+    }
   } catch (err) {
     throw err;
   }
