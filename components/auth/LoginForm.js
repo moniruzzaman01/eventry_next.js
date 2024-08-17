@@ -1,11 +1,13 @@
 "use client";
 
 import { loginUser } from "@/app/serverActions";
+import { useAuth } from "@/hooks/useAuth";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function LoginForm() {
   const router = useRouter();
+  const { setAuth } = useAuth();
   const [error, setError] = useState("");
 
   async function onsubmit(event) {
@@ -14,8 +16,9 @@ export default function LoginForm() {
     try {
       const formData = new FormData(event.currentTarget);
       const response = await loginUser(formData);
-      console.log(response);
+
       if (response) {
+        setAuth(response);
         router.push("/");
       }
     } catch (err) {
