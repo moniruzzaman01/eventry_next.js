@@ -1,6 +1,7 @@
 import Image from "next/image";
 import eventImage from "@/public/image.png";
 import Link from "next/link";
+import ActionButton from "../ActionButton";
 
 export default function SingleEvent() {
   return (
@@ -14,7 +15,7 @@ export default function SingleEvent() {
       />
 
       <div className="p-3">
-        <Link href="/events/id" className="font-bold text-lg">
+        <Link href="/details/id" className="font-bold text-lg">
           Google I/O Extended
         </Link>
         <p className="text-[#9C9C9C] text-sm mt-1">
@@ -26,13 +27,7 @@ export default function SingleEvent() {
           <span>40K Going</span>
         </div>
 
-        <div className="w-full flex gap-4 mt-4">
-          <button className="w-full bg-indigo-600 hover:bg-indigo-800">
-            Interested
-          </button>
-
-          <button className="w-full">Going</button>
-        </div>
+        <ActionButton />
       </div>
     </div>
   );

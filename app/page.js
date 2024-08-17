@@ -3,11 +3,9 @@ import Header from "@/components/landing/Header";
 
 export default function Home() {
   return (
-    <main class="py-8">
-      <section class="container">
-        <Header />
-        <AllEvents />
-      </section>
-    </main>
+    <section className="container">
+      <Header />
+      <AllEvents />
+    </section>
   );
 }
