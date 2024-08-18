@@ -1,10 +1,12 @@
 import Image from "next/image";
 import ActionButton from "../ActionButton";
 import { replaceMongoIdInArrayOfString } from "@/utils/db-utils";
+import { blurDataProvider } from "@/utils/blur_data_provider";
 
-export default function Hero({ eventDetails }) {
+export default async function Hero({ eventDetails }) {
   const { id, name, location, interested_ids, going_ids, imageUrl } =
     eventDetails || {};
+  const blurData = await blurDataProvider(imageUrl);
 
   return (
     <>
@@ -15,6 +17,8 @@ export default function Hero({ eventDetails }) {
           className="h-[450px] mx-auto"
           height={900}
           width={900}
+          placeholder="blur"
+          blurDataURL={blurData}
         />
       </div>
       <div className="flex items-end">
