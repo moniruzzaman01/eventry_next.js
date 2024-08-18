@@ -4,8 +4,10 @@ import {
 } from "@/utils/db-utils";
 import { eventsModel } from "../models/events";
 import mongoose from "mongoose";
+import { dbConnect } from "../dbConnect";
 
 export async function getAllEvents(query) {
+  await dbConnect();
   let response;
   if (query) {
     const regex = new RegExp(query, "i");
@@ -17,10 +19,12 @@ export async function getAllEvents(query) {
 }
 
 export async function getAnEventDetails(id) {
+  await dbConnect();
   const response = await eventsModel.findById(id).lean();
   return replaceMongoIdInObject(response);
 }
 export async function updateInterest(eventId, userId) {
+  await dbConnect();
   const event = await eventsModel.findById(eventId);
   if (event) {
     const isExist = event.interested_ids.find((id) => id.toString() === userId);
@@ -34,6 +38,7 @@ export async function updateInterest(eventId, userId) {
   }
 }
 export async function updateGoing(eventId, userId) {
+  await dbConnect();
   const event = await eventsModel.findById(eventId);
   if (event) {
     event.going_ids.push(new mongoose.Types.ObjectId(userId));
