@@ -1,4 +1,4 @@
-## Click here to visit the site: [Visit]("https://eventry-next-js.vercel.app/")
+## Click here to visit the site: [Visit](https://eventry-next-js.vercel.app/)
 
 ## Features
 
