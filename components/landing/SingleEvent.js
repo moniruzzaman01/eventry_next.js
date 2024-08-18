@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import ActionButton from "../ActionButton";
 import { replaceMongoIdInArrayOfString } from "@/utils/db-utils";
+import EventSchemaScript from "../meta/EventSchemaScript";
 
 export default function SingleEvent({ event }) {
   const { id, name, location, imageUrl, interested_ids, going_ids } =
@@ -9,6 +10,7 @@ export default function SingleEvent({ event }) {
 
   return (
     <div className="overflow-hidden rounded-md bg-[#242526]">
+      <EventSchemaScript event={event} />
       <Image
         src={imageUrl}
         height={200}
