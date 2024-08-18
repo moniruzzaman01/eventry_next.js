@@ -1,6 +1,6 @@
 "use server";
 
-import { updateInterest } from "@/db/quires/events";
+import { updateGoing, updateInterest } from "@/db/quires/events";
 import { createUser, findUserWithEmailAndPassword } from "@/db/quires/users";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
@@ -27,6 +27,17 @@ export async function addOrRemoveInterest(eventId, userId) {
     const isUpdated = await updateInterest(eventId, userId);
     if (isUpdated) {
       revalidatePath("/");
+    }
+  } catch (err) {
+    throw err;
+  }
+}
+export async function addGoing(eventId, userId) {
+  try {
+    const isGoing = await updateGoing(eventId, userId);
+    if (isGoing) {
+      revalidatePath("/");
+      redirect("/");
     }
   } catch (err) {
     throw err;

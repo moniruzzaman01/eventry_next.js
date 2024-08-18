@@ -27,3 +27,11 @@ export async function updateInterest(eventId, userId) {
     return true;
   }
 }
+export async function updateGoing(eventId, userId) {
+  const event = await eventsModel.findById(eventId);
+  if (event) {
+    event.going_ids.push(new mongoose.Types.ObjectId(userId));
+    event.save();
+    return true;
+  }
+}

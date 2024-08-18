@@ -1,6 +1,13 @@
-export default function PaymentForm() {
+"use client";
+
+import { addGoing } from "@/app/serverActions";
+import { useAuth } from "@/hooks/useAuth";
+
+export default function PaymentForm({ eventId }) {
+  const { auth } = useAuth();
+
   return (
-    <form>
+    <form action={() => addGoing(eventId, auth?.id)}>
       <div className="my-4 space-y-2">
         <label htmlFor="name" className="block">
           Name

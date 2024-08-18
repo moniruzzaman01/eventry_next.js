@@ -1,5 +1,6 @@
 import Image from "next/image";
 import ActionButton from "../ActionButton";
+import { replaceMongoIdInArrayOfString } from "@/utils/db-utils";
 
 export default function Hero({ eventDetails }) {
   const { id, name, location, interested_ids, going_ids, imageUrl } =
@@ -27,7 +28,11 @@ export default function Hero({ eventDetails }) {
           </div>
         </div>
 
-        <ActionButton eventId={id} />
+        <ActionButton
+          eventId={id}
+          interested_ids={replaceMongoIdInArrayOfString(interested_ids)}
+          going_ids={replaceMongoIdInArrayOfString(going_ids)}
+        />
       </div>
     </>
   );

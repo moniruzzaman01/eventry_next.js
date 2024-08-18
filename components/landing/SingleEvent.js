@@ -31,6 +31,7 @@ export default function SingleEvent({ event }) {
         <ActionButton
           eventId={id}
           interested_ids={replaceMongoIdInArrayOfString(interested_ids)}
+          going_ids={replaceMongoIdInArrayOfString(going_ids)}
         />
       </div>
     </div>

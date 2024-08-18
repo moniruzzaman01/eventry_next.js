@@ -4,11 +4,12 @@ import { addOrRemoveInterest } from "@/app/serverActions";
 import { useAuth } from "@/hooks/useAuth";
 import { useRouter } from "next/navigation";
 
-export default function ActionButton({ eventId, interested_ids }) {
+export default function ActionButton({ eventId, interested_ids, going_ids }) {
   const { auth } = useAuth();
   const router = useRouter();
 
   const isInterested = interested_ids.find((id) => id === auth?.id);
+  const isGoing = going_ids.find((id) => id === auth?.id);
 
   async function handleInterest() {
     if (!auth) {
@@ -21,7 +22,7 @@ export default function ActionButton({ eventId, interested_ids }) {
     if (!auth) {
       return router.push("/login");
     }
-    router.push("/payment");
+    router.push(`/payment/${eventId}`);
   }
 
   return (
@@ -34,7 +35,11 @@ export default function ActionButton({ eventId, interested_ids }) {
       >
         Interested
       </button>
-      <button onClick={handleOnGoing} className="w-full">
+      <button
+        disabled={auth?.id && isGoing}
+        onClick={handleOnGoing}
+        className="w-full disabled:bg-green-600"
+      >
         Going
       </button>
     </div>
