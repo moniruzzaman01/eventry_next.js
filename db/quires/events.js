@@ -5,8 +5,14 @@ import {
 import { eventsModel } from "../models/events";
 import mongoose from "mongoose";
 
-export async function getAllEvents() {
-  const response = await eventsModel.find().lean();
+export async function getAllEvents(query) {
+  let response;
+  if (query) {
+    const regex = new RegExp(query, "i");
+    response = await eventsModel.find({ name: { $regex: regex } }).lean();
+  } else {
+    response = await eventsModel.find().lean();
+  }
   return replaceMongoIdInArray(response);
 }
 
