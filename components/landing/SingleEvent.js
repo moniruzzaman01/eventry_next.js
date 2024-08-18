@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import ActionButton from "../ActionButton";
+import { replaceMongoIdInArrayOfString } from "@/utils/db-utils";
 
 export default function SingleEvent({ event }) {
   const { id, name, location, imageUrl, interested_ids, going_ids } =
@@ -27,7 +28,10 @@ export default function SingleEvent({ event }) {
           <span>{going_ids?.length} Going</span>
         </div>
 
-        <ActionButton eventId={id} />
+        <ActionButton
+          eventId={id}
+          interested_ids={replaceMongoIdInArrayOfString(interested_ids)}
+        />
       </div>
     </div>
   );
