@@ -7,7 +7,7 @@ export default function PaymentForm({ eventId }) {
   const { auth } = useAuth();
 
   return (
-    <form action={() => addGoing(eventId, auth?.id)}>
+    <form action={() => addGoing(eventId, auth)}>
       <div className="my-4 space-y-2">
         <label htmlFor="name" className="block">
           Name
